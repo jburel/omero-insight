@@ -20,7 +20,7 @@ install:
 
 script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./gradlew packageApplicationDmg ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" && "$TRAVIS_PULL_REQUEST" = "false" ]]; then ./gradlew packageImporterApplicationDmg ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" && -n "$TRAVIS_TAG" ]]; then ./gradlew packageImporterApplicationDmg ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -f build/packaged/main/bundles/OMERO.insight-* ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./gradlew build ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then test -f build/distributions/OMERO.imagej-* ; fi
