@@ -49,11 +49,15 @@ class PackagerPlugin implements Plugin<Project> {
                 project.extensions.getByName("deploy") as InstallOptionsContainer
 
         // Configure main install options (insight)
+        ((WinOptions) winOptions).registryVendor = "The OME team, University of Dundee"
+        ((WinOptions) winOptions).startMenuGroup = "OMERO insight"
         InstallOptions main = installOptionsContainer.getByName(JavaPackagerPlugin.MAIN_DEPLOY_NAME)
         main.icon = "${project.projectDir}/icons/omeroInsight"
         main.arguments = ["container.xml"]
         main.exe(winOptions)
         main.msi(winOptions)
+        main.applicationDescription = "OMERO Desktop application for visualizing, managing, " +
+                "and annotating microscope images and metadata."
 
         createImporterInstaller(installOptionsContainer)
     }
@@ -80,6 +84,7 @@ class PackagerPlugin implements Plugin<Project> {
                 importer.sourceFiles.from(project.fileTree(distTask.destinationDir).include("**/*.*"))
                 importer.exe(winOptions)
                 importer.msi(winOptions)
+                importer.applicationDescription = "OMERO Desktop application for importing images and metadata."
             }
         })
 
