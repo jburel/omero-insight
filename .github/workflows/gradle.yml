@@ -52,7 +52,5 @@ jobs:
           brew cask install zulu8
           ls -la /Library/Java/JavaVirtualMachines
           jenv add /Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home
-
-          jenv global zulu-8.jdk
           java -version
           ./gradlew packageApplicationDmg
