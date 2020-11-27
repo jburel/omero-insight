@@ -40,5 +40,7 @@ jobs:
       - name: Build Executable
         if: startsWith(matrix.os, 'windows')
         run: |
+          choco uninstall innosetup
+          choco install innosetup --version=5.6.1
           nuget install WiX
           ./gradlew packageApplicationExe
