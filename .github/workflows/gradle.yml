@@ -45,3 +45,8 @@ jobs:
           nuget install WiX
           ./gradlew packageApplicationExe
           ./gradlew packageApplicationMsi
+      - name: Build dm
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          brew cask install zulu8
+          ./gradlew packageApplicationDmg
