@@ -50,5 +50,5 @@ jobs:
         run: |
           brew install jenv
           brew cask install zulu8
-          jenv global zulu8
+          ls -la /Library/Java/JavaVirtualMachines
           ./gradlew packageApplicationDmg
