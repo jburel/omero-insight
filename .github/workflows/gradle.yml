@@ -40,9 +40,5 @@ jobs:
       - name: Build Executable
         if: startsWith(matrix.os, 'windows')
         run: |
-          choco install nuget.commandline
-          DIR=$PWD
-          cd "C:\Program Files (x86)"
           nuget install WiX
-          cd $DIR
           ./gradlew packageApplicationExe
