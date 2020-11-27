@@ -11,8 +11,8 @@ jobs:
   build:
     strategy:
       matrix:
-        java: [1.8, 11]
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        java: [1.8]
+        os: [windows-latest]
     runs-on: ${{ matrix.os }}
     env:
       gradle_version: 5.2.1 # set to empty to build with most recent version of gradle
@@ -37,3 +37,19 @@ jobs:
         if: ${{ env.gradle_version == '' }}
       - name: Run commands
         run: ./gradlew ${{ env.gradle_commands }}
+      - name: Build Executable
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          choco install jdk8
+          choco install innosetup --version=5.6.1
+          export PATH="/c/Program Files/Java/jdk1.8.0_211:/c/ProgramData/chocolatey/lib/gradle/tools:$PATH"
+          export PATH="/c/Program Files (x86)/Inno Setup 5:$PATH"
+          export JAVA_HOME="/c/Program Files/Java/jdk1.8.0_211"
+          export GRADLE_OPTS="-Dorg.gradle.daemon=false"
+          choco install nuget.commandline
+          DIR=$PWD
+          cd "C:\Program Files (x86)"
+          nuget install WiX
+          export PATH="/c/Program Files (x86)/WiX.3.11.2/tools:$PATH"
+          cd $DIR
+          ./gradlew packageApplicationExe
