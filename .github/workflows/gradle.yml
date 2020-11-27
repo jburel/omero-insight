@@ -35,8 +35,8 @@ jobs:
       - name: Wrap without version
         run: gradle wrapper
         if: ${{ env.gradle_version == '' }}
-      - name: Run commands
-        run: ./gradlew ${{ env.gradle_commands }}
+      #- name: Run commands
+      #  run: ./gradlew ${{ env.gradle_commands }}
       - name: Build Executable
         if: startsWith(matrix.os, 'windows')
         run: |
@@ -49,4 +49,5 @@ jobs:
         if: startsWith(matrix.os, 'macos')
         run: |
           brew cask install zulu8
+          echo $JAVA_HOME
           ./gradlew packageApplicationDmg
