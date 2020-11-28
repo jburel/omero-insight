@@ -21,4 +21,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build Executable
         run: |
-          echo $PWD
+          nuget install WiX
+          echo "PATH=$PATH:$PWD\WiX.3.11.2\tools"
+          echo $PATH
