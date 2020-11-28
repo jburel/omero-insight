@@ -89,3 +89,8 @@ deploy:
     on:
       tags: true
       condition: "$TRAVIS_OS_NAME != linux"
+
+
+          #echo "var"=%cd% >> $GITHUB_ENV
+          #nuget install WiX
+          #echo "##[add-path]:%cd%\WiX.3.11.2\tools"
