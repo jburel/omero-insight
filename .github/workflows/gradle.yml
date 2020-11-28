@@ -41,5 +41,5 @@ jobs:
           choco install innosetup --version=5.6.1
           SET var=%cd%
           nuget install WiX
-          set PATH=%PATH%;%var%/WiX.3.11.2/tools
+          set PATH=%PATH%;%var%\WiX.3.11.2\tools
           ./gradlew packageApplicationMsi
