@@ -43,5 +43,6 @@ jobs:
           choco uninstall innosetup
           choco install innosetup --version=5.6.1
           nuget install WiX
-          echo "$PWD\WiX.3.11.2\tools" >> $GITHUB_PATH
+          echo "PATH=$PWD\WiX.3.11.2\tools;"$PATH
+          set path $PATH
           ./gradlew packageApplicationMsi
