@@ -22,5 +22,5 @@ jobs:
       - name: Build Executable
         run: |
           nuget install WiX
-          echo "PATH=$PATH:$PWD\WiX.3.11.2\tools"
+          echo "PATH="$PATH:$PWD\WiX.3.11.2\tools
           echo $PATH
