@@ -22,7 +22,7 @@ jobs:
       - name: Build Executable
         if: startsWith(matrix.os, 'windows')
         run: |
-          echo DIR=$PWD >> GITHUB_ENV
+          echo "DIR="$PWD >> GITHUB_ENV
           cd "C:\Program Files (x86)"
           nuget install WiX
           echo "PATH=$PWD\WiX.3.11.2\tools;"$PATH
