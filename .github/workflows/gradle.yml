@@ -23,4 +23,4 @@ jobs:
         run: |
           echo "var"=%cd% >> $GITHUB_ENV
           nuget install WiX
-          echo "##[add-path]:${{env.var}}\WiX.3.11.2\tools"
+          echo "##[add-path]:%cd%\WiX.3.11.2\tools"
