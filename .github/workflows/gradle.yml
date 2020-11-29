@@ -27,4 +27,5 @@ jobs:
           #./gradlew --info packageApplicationMsi
           ls "C:\Program Files (x86)\WiX Toolset v3.11\bin"
           echo $GITHUB_PATH
+          candle.exe
 
