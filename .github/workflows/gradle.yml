@@ -23,10 +23,11 @@ jobs:
         if: startsWith(matrix.os, 'windows')
         run: |
           echo "DIR=$PWD" >> GITHUB_ENV
-          #cd "C:\Program Files (x86)"
+          cd "C:\Program Files (x86)"
+          ls
           #nuget install WiX
           # echo "PATH=$PWD\WiX.3.11.2\tools;"$PATH
           #set path $PATH
           #echo $PATH
           cd $DIR
-          echo $DIR
+          ls
