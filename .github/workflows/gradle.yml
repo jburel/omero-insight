@@ -42,8 +42,9 @@ jobs:
         run: |
           choco uninstall innosetup
           choco install innosetup --version=5.6.1
-          choco uninstall wixtoolset
-          choco install wixtoolset
+          #choco uninstall wixtoolset
+          #choco install wixtoolset
           #echo "PATH=$PWD\WiX.3.11.2\tools;"$PATH
           #set path PATH
+          echo $PATH
           ./gradlew packageApplicationMsi
