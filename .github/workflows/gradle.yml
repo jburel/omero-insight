@@ -19,10 +19,6 @@ jobs:
       gradle_commands: build # default is build
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK ${{ matrix.java }}
-        uses: actions/setup-java@v1
-        with:
-          java-version: ${{ matrix.java }}
       - name: Cache Gradle packages
         uses: actions/cache@v2
         with:
@@ -42,9 +38,5 @@ jobs:
         run: |
           choco uninstall innosetup
           choco install innosetup --version=5.6.1
-          #choco uninstall wixtoolset
-          #choco install wixtoolset
-          #echo "PATH=$PWD\WiX.3.11.2\tools;"$PATH
-          #set path PATH
-          echo $PATH
+          java -version
           ./gradlew packageApplicationMsi
