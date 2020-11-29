@@ -41,5 +41,9 @@ jobs:
         if: startsWith(matrix.os, 'windows')
         run: |
           choco uninstall innosetup
+          choco uninstall Wix
           choco install innosetup --version=5.6.1
+          nuget install WiX
+          echo "PATH=$PWD\WiX.3.11.2\tools;"$PATH
+          set path PATH
           ./gradlew packageApplicationMsi
