@@ -52,7 +52,7 @@ jobs:
           export PATH=$JAVA_HOME/bin:$PATH
           ./gradlew packageApplicationDmg
           ./gradlew packageImporterApplicationDmg
-      - name: Upload zip to release
+      - name: Upload zip
         if: startsWith(matrix.os, 'ubuntu') && startsWith(github.ref, 'refs/tags') && matrix.java == '1.8'
         uses: svenstaro/upload-release-action@v2
         with:
@@ -61,7 +61,7 @@ jobs:
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
-      - name: Upload jar to release
+      - name: Upload jar
         if: startsWith(matrix.os, 'ubuntu') && startsWith(github.ref, 'refs/tags') && matrix.java == '1.8'
         uses: svenstaro/upload-release-action@v2
         with:
@@ -70,7 +70,7 @@ jobs:
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
-      - name: Upload insight artifacts to release
+      - name: Upload insight artifacts
         if: startsWith(matrix.os, 'ubuntu') != true && startsWith(github.ref, 'refs/tags') && matrix.java == '1.8'
         uses: svenstaro/upload-release-action@v2
         with:
@@ -79,7 +79,7 @@ jobs:
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
-      - name: Upload importer artifacts to release
+      - name: Upload importer artifacts
         if: startsWith(matrix.os, 'ubuntu') != true && startsWith(github.ref, 'refs/tags') && matrix.java == '1.8'
         uses: svenstaro/upload-release-action@v2
         with:
@@ -88,15 +88,3 @@ jobs:
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
-  release:
-    needs: build
-    if: startsWith(github.ref, 'refs/tags')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Create a release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
