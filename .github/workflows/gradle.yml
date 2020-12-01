@@ -11,8 +11,8 @@ jobs:
   build:
     strategy:
       matrix:
-        java: [1.8, 11]
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        java: [1.8]
+        os: [windows-latest]
     runs-on: ${{ matrix.os }}
     env:
       gradle_version: 5.2.1 # set to empty to build with most recent version of gradle
@@ -29,9 +29,20 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
-      - name: Get the version
-        id: get_version
-        run: echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/v}
+      - name: Wrap with specified version
+        run: gradle wrapper --gradle-version=${{ env.gradle_version }}
+        if: ${{ env.gradle_version != '' }}
+      - name: Wrap without version
+        run: gradle wrapper
+        if: ${{ env.gradle_version == '' }}
+      - name: Run commands
+        run: ./gradlew ${{ env.gradle_commands }}
+      - name: Prepare PATH
         shell: bash
-      - name: Echo
-        run: echo ${{ steps.get_version.outputs.SOURCE_TAG }}
+        run: echo "$WIX\\bin" >> $GITHUB_PATH
+      - name: Build Executable
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          choco uninstall innosetup
+          choco install innosetup --version=5.6.1
+          ./gradlew packageApplicationMsi
