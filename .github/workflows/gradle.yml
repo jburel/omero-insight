@@ -32,5 +32,6 @@ jobs:
       - name: Get the version
         id: get_version
         run: echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/v}
+        shell: bash
       - name: Echo
         run: echo ${{ steps.get_version.outputs.SOURCE_TAG }}
