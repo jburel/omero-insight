@@ -72,21 +72,14 @@ jobs:
           ./gradlew packageApplicationDmg
           ./gradlew packageImporterApplicationDmg
       - name: Upload zip and jar
-        if: startsWith(matrix.os, 'ubuntu') && startsWith(github.ref, 'refs/tags') && matrix.java == '1.8'
+        if: startsWith(matrix.os, 'ubuntu') && matrix.java == '1.8'
         uses: actions/upload-artifact@v2
         with:
             name: artifacts
             path: |
-              build/distributions/OMERO*
-              build/libs/omero_*
+              build/distributions/*.zip
+              build/libs/omero_*.jar
             if-no-files-found: error
-      - name: Upload jar
-        if: startsWith(matrix.os, 'ubuntu') && startsWith(github.ref, 'refs/tags') && matrix.java == '1.8'
-        uses: actions/upload-artifact@v2
-        with:
-          name: artifacts
-          path: build/distributions/OMERO*
-          if-no-files-found: error
       - name: Upload insight artifacts
         if: startsWith(matrix.os, 'ubuntu') != true && startsWith(github.ref, 'refs/tags') && matrix.java == '1.8'
         uses: actions/upload-artifact@v2
