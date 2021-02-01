@@ -36,8 +36,6 @@ jobs:
       - name: Wrap without version
         run: gradle wrapper
         if: ${{ env.gradle_version == '' }}
-      - name: Run commands
-        run: ./gradlew ${{ env.gradle_commands }}
       - name: Prepare PATH
         if: startsWith(matrix.os, 'windows')
         shell: bash
