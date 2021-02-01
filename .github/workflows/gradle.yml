@@ -68,7 +68,7 @@ jobs:
         run: |
           brew install --cask zulu
           ls /Library/Java/JavaVirtualMachines/
-          export JAVA_HOME='/Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home'
+          export JAVA_HOME='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home'
           export PATH=$JAVA_HOME/bin:$PATH
           ./gradlew packageApplicationDmg
           ./gradlew packageImporterApplicationDmg
