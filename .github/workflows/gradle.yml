@@ -65,9 +65,9 @@ jobs:
         if: startsWith(matrix.os, 'macos') && matrix.java == '1.8'
         run: |
           brew tap bell-sw/liberica
-          brew install --cask liberica-jdk15-full
+          brew install --cask liberica-jdk8-full
           ls /Library/Java/JavaVirtualMachines
-          export JAVA_HOME='/Library/Java/JavaVirtualMachines/liberica-jdk-15-full.jdk/Contents/Home'
+          export JAVA_HOME='/Library/Java/JavaVirtualMachines/liberica-jdk-8-full.jdk/Contents/Home'
           export PATH=$JAVA_HOME/bin:$PATH
           ./gradlew packageApplicationDmg
           ./gradlew packageImporterApplicationDmg
