@@ -68,8 +68,9 @@ jobs:
         run: |
           wget https://cdn.azul.com/zulu/bin/zulu1.8.0_66-8.11.0.1-macosx.dmg
           hdiutil attach zulu1.8.0_66-8.11.0.1-macosx.dmg
-          ls /Volumes/
-          export JAVA_HOME='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home'
+          cp /Volumes/Zulu\OpenJDK\8.11.0.1 /Library/Java/JavaVirtualMachines/zulu8-jdk
+          hdiutil detach /Volumes/Zulu\OpenJDK\8.11.0.1
+          export JAVA_HOME='/Library/Java/JavaVirtualMachines/zulu8-jdk/Contents/Home'
           export PATH=$JAVA_HOME/bin:$PATH
           ./gradlew packageApplicationDmg
           ./gradlew packageImporterApplicationDmg
