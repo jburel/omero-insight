@@ -67,7 +67,7 @@ jobs:
           brew tap bell-sw/liberica
           brew install --cask liberica-jdk15-full
           ls /Library/Java/JavaVirtualMachines
-          export JAVA_HOME='/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home'
+          export JAVA_HOME='/Library/Java/JavaVirtualMachines/liberica-jdk-15-full.jdk/Contents/Home'
           export PATH=$JAVA_HOME/bin:$PATH
           ./gradlew packageApplicationDmg
           ./gradlew packageImporterApplicationDmg
