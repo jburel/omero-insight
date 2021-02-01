@@ -64,11 +64,9 @@ jobs:
       - name: Build Dmg
         if: startsWith(matrix.os, 'macos') && matrix.java == '1.8'
         run: |
-          wget -q https://cdn.azul.com/zulu/bin/zulu1.8.0_66-8.11.0.1-macosx.dmg
-          hdiutil attach zulu1.8.0_66-8.11.0.1-macosx.dmg
-          ls "/Volumes/Zulu OpenJDK 8.11.0.1"
-          sudo installer -package "/Volumes/Zulu OpenJDK 8.11.0.1/Zulu OpenJDK 8.11.0.1.pkg" -target /Library/Java/JavaVirtualMachines
-          ls /Library/Java/JavaVirtualMachines/
+          brew tap bell-sw/liberica
+          brew install --cask liberica-jdk15-full
+          ls /Library/Java/JavaVirtualMachines
           export JAVA_HOME='/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home'
           export PATH=$JAVA_HOME/bin:$PATH
           ./gradlew packageApplicationDmg
