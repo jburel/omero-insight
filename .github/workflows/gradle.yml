@@ -64,12 +64,10 @@ jobs:
       - name: Build Dmg
         if: startsWith(matrix.os, 'macos') && matrix.java == '1.8'
         run: |
-          wget https://cdn.azul.com/zulu/bin/zulu1.8.0_66-8.11.0.1-macosx.dmg
-          hdiutil attach zulu1.8.0_66-8.11.0.1-macosx.dmg
-          sudo cp -R "/Volumes/Zulu OpenJDK 8.11.0.1" /Library/Java/JavaVirtualMachines/zulu8-jdk
+          brew tap mdogan/zulu
+          brew install --cask zulu-jdk8
           ls /Library/Java/JavaVirtualMachines
-          hdiutil detach "/Volumes/Zulu OpenJDK 8.11.0.1"
-          export JAVA_HOME='/Library/Java/JavaVirtualMachines/zulu8-jdk/Contents/Home'
+          export JAVA_HOME='/Library/Java/JavaVirtualMachines/zulu-jdk8/Contents/Home'
           export PATH=$JAVA_HOME/bin:$PATH
           ./gradlew packageApplicationDmg
           ./gradlew packageImporterApplicationDmg
