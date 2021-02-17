@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         java: [8.0.275, 11]
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [macos-10.14]
     runs-on: ${{ matrix.os }}
     env:
       gradle_version:  # set to empty to build with most recent version of gradle
