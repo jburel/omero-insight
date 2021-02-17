@@ -64,7 +64,7 @@ jobs:
           fi
         shell: bash
       - name: Build Dmg
-        if: startsWith(matrix.os, 'macos') && startsWith(matrix.java, '11')
+        if: startsWith(matrix.os, 'macos')
         run: |
           ls /Library/Java/JavaVirtualMachines
           export JAVA_HOME='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home'
