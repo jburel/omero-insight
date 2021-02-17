@@ -12,8 +12,8 @@ jobs:
   build:
     strategy:
       matrix:
-        java: [8.0.275, 11]
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        java: [11]
+        os: [macos-latest]
     runs-on: ${{ matrix.os }}
     env:
       gradle_version:  # set to empty to build with most recent version of gradle
@@ -64,9 +64,10 @@ jobs:
           fi
         shell: bash
       - name: Build Dmg
-        if: startsWith(matrix.os, 'macos') && startsWith(github.ref, 'refs/tags') && startsWith(matrix.java, '8')
+        if: startsWith(matrix.os, 'macos') && startsWith(matrix.java, '11')
         run: |
-          export JAVA_HOME='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home'
+          ls /Library/Java/JavaVirtualMachines
+          export JAVA_HOME='/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home'
           export PATH=$JAVA_HOME/bin:$PATH
           ./gradlew packageApplicationDmg
           ./gradlew packageImporterApplicationDmg
@@ -85,14 +86,14 @@ jobs:
           path: build/libs/omero_*
           if-no-files-found: error
       - name: Upload insight artifacts
-        if: startsWith(matrix.os, 'ubuntu') != true && startsWith(github.ref, 'refs/tags') && startsWith(matrix.java, '8')
+        if: startsWith(matrix.os, 'ubuntu') != true
         uses: actions/upload-artifact@v2
         with:
           name: artifacts
           path: build/packaged/main/bundles/*
           if-no-files-found: error
       - name: Upload importer artifacts
-        if: startsWith(matrix.os, 'ubuntu') != true && startsWith(github.ref, 'refs/tags') && startsWith(matrix.java, '8')
+        if: startsWith(matrix.os, 'ubuntu') != true
         uses: actions/upload-artifact@v2
         with:
           name: artifacts
