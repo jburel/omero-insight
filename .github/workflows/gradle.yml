@@ -12,7 +12,7 @@ jobs:
   build:
     strategy:
       matrix:
-        java: [11]
+        java: [8.0.275]
         os: [macos-latest]
     runs-on: ${{ matrix.os }}
     env:
