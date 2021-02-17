@@ -67,7 +67,7 @@ jobs:
         if: startsWith(matrix.os, 'macos') && startsWith(matrix.java, '11')
         run: |
           ls /Library/Java/JavaVirtualMachines
-          export JAVA_HOME='/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home'
+          export JAVA_HOME='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home'
           export PATH=$JAVA_HOME/bin:$PATH
           ./gradlew packageApplicationDmg
           ./gradlew packageImporterApplicationDmg
