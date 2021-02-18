@@ -66,7 +66,7 @@ jobs:
       - name: Build Dmg
         if: startsWith(matrix.os, 'macos')
         run: |
-          brew cask install zulu8
+          brew install --cask zulu8
           ls /Library/Java/JavaVirtualMachines
           export JAVA_HOME='/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home'
           export PATH=$JAVA_HOME/bin:$PATH
