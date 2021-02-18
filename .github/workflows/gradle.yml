@@ -63,20 +63,18 @@ jobs:
               exit 1
           fi
         shell: bash
-      - name: Prepare PATH
-        if: startsWith(matrix.os, 'macos')
-        shell: bash
-        run: |
-          brew tap homebrew/cask-versions
-          brew install --cask zulu8
-          export JAVA_HOME='/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home'
-          echo "$JAVA_HOME/bin" >> $GITHUB_PATH
       - name: Build Dmg
         if: startsWith(matrix.os, 'macos')
         run: |
+          brew tap bell-sw/liberica
+          brew install --cask liberica-jdk8-full
+          ls /Library/Java/JavaVirtualMachines
+          export JAVA_HOME='/Library/Java/JavaVirtualMachines/liberica-jdk-8-full.jdk/Contents/Home'
+          export PATH=$JAVA_HOME/bin:$PATH
           which java
           #echo $PATH
-          gradle packageApplicationDmg
+          echo $GITHUB_PATH
+          # gradle packageApplicationDmg
       - name: Upload zip and jar
         if: startsWith(matrix.os, 'ubuntu') && startsWith(github.ref, 'refs/tags') && startsWith(matrix.java, '8')
         uses: actions/upload-artifact@v2
