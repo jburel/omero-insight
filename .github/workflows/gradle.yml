@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         java: [8.0.275]
-        os: [macos-10.13]
+        os: [macos-10.14]
     runs-on: ${{ matrix.os }}
     env:
       gradle_version:  # set to empty to build with most recent version of gradle
@@ -72,7 +72,8 @@ jobs:
           export JAVA_HOME='/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home'
           export PATH=$JAVA_HOME/bin:$PATH
           which java
-          gradle packageApplicationDmg
+          echo $PATH
+          # gradle packageApplicationDmg
       - name: Upload zip and jar
         if: startsWith(matrix.os, 'ubuntu') && startsWith(github.ref, 'refs/tags') && startsWith(matrix.java, '8')
         uses: actions/upload-artifact@v2
