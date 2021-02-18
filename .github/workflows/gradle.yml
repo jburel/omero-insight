@@ -69,7 +69,8 @@ jobs:
           ls /Library/Java/JavaVirtualMachines
           export JAVA_HOME='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home'
           export PATH=$JAVA_HOME/bin:$PATH
-          ./gradlew packageApplicationPkg
+          ./gradlew packageApplicationDmg
+          codesign --remove-signature build/distributions/*.dmg
       - name: Upload zip and jar
         if: startsWith(matrix.os, 'ubuntu') && startsWith(github.ref, 'refs/tags') && startsWith(matrix.java, '8')
         uses: actions/upload-artifact@v2
