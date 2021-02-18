@@ -36,8 +36,8 @@ jobs:
       - name: Wrap without version
         run: gradle wrapper
         if: ${{ env.gradle_version == '' }}
-      - name: Run commands
-        run: ./gradlew ${{ env.gradle_commands }}
+      #- name: Run commands
+      #  run: ./gradlew ${{ env.gradle_commands }}
       - name: Prepare PATH
         if: startsWith(matrix.os, 'windows')
         shell: bash
@@ -66,11 +66,11 @@ jobs:
       - name: Build Dmg
         if: startsWith(matrix.os, 'macos')
         run: |
+          brew cask install zulu8
           ls /Library/Java/JavaVirtualMachines
-          export JAVA_HOME='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home'
+          export JAVA_HOME='/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home'
           export PATH=$JAVA_HOME/bin:$PATH
           ./gradlew packageApplicationDmg
-          codesign --remove-signature build/packaged/main/bundles/*.dmg
       - name: Upload zip and jar
         if: startsWith(matrix.os, 'ubuntu') && startsWith(github.ref, 'refs/tags') && startsWith(matrix.java, '8')
         uses: actions/upload-artifact@v2
