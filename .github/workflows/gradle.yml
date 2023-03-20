@@ -12,8 +12,8 @@ jobs:
   build:
     strategy:
       matrix:
-        java: [8.0.275, 11]
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        java: [8.0.275]
+        os: [windows-latest]
     runs-on: ${{ matrix.os }}
     env:
       gradle_version: 6.8.3 # use ``current`` to install the current stable release
@@ -28,7 +28,7 @@ jobs:
           cache: "gradle"
       - uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: ${{ env.gradle_version }}
+          wrapper: ${{ env.gradle_version }}
       - name: Run commands
         run: gradle ${{ env.gradle_commands }}
       - name: Prepare PATH
@@ -36,11 +36,11 @@ jobs:
         shell: bash
         run: echo "$WIX\\bin" >> $GITHUB_PATH
       - name: Build Executable
-        if: startsWith(matrix.os, 'windows') && startsWith(github.ref, 'refs/tags') && startsWith(matrix.java, '8')
+        if: startsWith(matrix.os, 'windows')
         run: |
           choco uninstall innosetup
           choco install innosetup --version=5.6.1
-          gradle packageApplicationExe
+          ./gradlew packageApplicationExe
           gradle packageImporterApplicationExe
           gradle packageApplicationMsi
           gradle packageImporterApplicationMsi
