@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         java: [8]
-        os: [windows-2019]
+        os: [windows-latest]
     runs-on: ${{ matrix.os }}
     env:
       gradle_version: 6.8.3 # use ``current`` to install the current stable release
@@ -34,14 +34,12 @@ jobs:
       #  run: gradle ${{ env.gradle_commands }}
       - name: Prepare PATH
         if: startsWith(matrix.os, 'windows')
-        shell: cmd
-        run: echo "$WIX\\bin" >> $GITHUB_PATH
+        shell: bash
+        run: echo "C:\Program Files (x86)\WiX Toolset v3.11\bin" >> $GITHUB_PATH
       - name: Build Executable
         if: startsWith(matrix.os, 'windows')
         run: |
-          choco uninstall innosetup
-          choco install innosetup --version=5.6.1
-          gradle packageApplicationExe
+          gradle packageApplicationMsi
         shell: cmd
       - name: Check MSI
         if: startsWith(matrix.os, 'windows') && startsWith(github.ref, 'refs/tags') && startsWith(matrix.java, '8')
