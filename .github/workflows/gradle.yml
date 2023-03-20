@@ -12,8 +12,8 @@ jobs:
   build:
     strategy:
       matrix:
-        java: [11]
-        os: [windows-latest]
+        java: [8.0.275]
+        os: [windows-2019]
     runs-on: ${{ matrix.os }}
     env:
       gradle_version: 6.8.3 # use ``current`` to install the current stable release
