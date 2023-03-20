@@ -28,7 +28,7 @@ jobs:
           cache: "gradle"
       - uses: gradle/gradle-build-action@v2
         with:
-          wrapper: ${{ env.gradle_version }}
+          gradle-version: ${{ env.gradle_version }}
       #- name: Run commands
       #  run: gradle ${{ env.gradle_commands }}
       - name: Prepare PATH
@@ -38,7 +38,7 @@ jobs:
       - name: Build Executable
         if: startsWith(matrix.os, 'windows')
         run: |
-          gradle packageApplicationMsi --scan
+          gradle packageApplicationMsi --stacktrace
       - name: Check MSI
         if: startsWith(matrix.os, 'windows') && startsWith(github.ref, 'refs/tags') && startsWith(matrix.java, '8')
         run: |
