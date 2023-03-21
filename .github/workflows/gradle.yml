@@ -29,7 +29,7 @@ jobs:
           java-package: 'jdk+fx'
       - name: Java home
         run: |
-          echo $JAVA_HOME
+          ls $JAVA_HOME
       - uses: gradle/gradle-build-action@v2
         with:
           gradle-version: ${{ env.gradle_version }}
