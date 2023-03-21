@@ -37,10 +37,11 @@ jobs:
         run: |
           mkdir $HOME/jre
           mkdir -p $HOME/jre/Contents/Home
-          ln -s $JAVA_HOME/jre $HOME/jre
+          cd $HOME/jre
+          ln -s $JAVA_HOME/jre .
           ls -l $HOME
           export JAVA_HOME=$HOME/jre/Contents/Home
-          gradle ${{ env.gradle_commands }}
+          #gradle ${{ env.gradle_commands }}
       - name: Prepare PATH
         if: startsWith(matrix.os, 'windows')
         shell: bash
