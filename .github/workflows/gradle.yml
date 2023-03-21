@@ -35,9 +35,10 @@ jobs:
           gradle-version: ${{ env.gradle_version }}
       - name: Run commands
         run: |
-          mkdir -p $HOME/Contents/Home
-          ln -s $JAVA_HOME/jre $HOME
-          export JAVA_HOME=$HOME/Contents/Home
+          mkdir -p $HOME/link/Contents/Home
+          ln -s $JAVA_HOME/jre $HOME/link
+          ls -l $HOME/link
+          export JAVA_HOME=$HOME/link/Contents/Home
           gradle ${{ env.gradle_commands }}
       - name: Prepare PATH
         if: startsWith(matrix.os, 'windows')
