@@ -35,10 +35,10 @@ jobs:
           gradle-version: ${{ env.gradle_version }}
       - name: Run commands
         run: |
-          pwd
+          echo $HOME
           mkdir -p Contents/Home
           ln -s $JAVA_HOME/jre .
-          echo $JAVA_HOME
+          export $JAVA_HOME=/Users/runner/work/omero-insight/omero-insight
           gradle ${{ env.gradle_commands }}
       - name: Prepare PATH
         if: startsWith(matrix.os, 'windows')
