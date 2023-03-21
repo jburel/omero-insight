@@ -27,6 +27,9 @@ jobs:
           distribution: 'zulu'
           cache: 'gradle'
           java-package: 'jdk+fx'
+      - name: Java home
+        run: |
+          echo $JAVA_HOME
       - uses: gradle/gradle-build-action@v2
         with:
           gradle-version: ${{ env.gradle_version }}
