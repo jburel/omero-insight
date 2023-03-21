@@ -36,6 +36,7 @@ jobs:
       - name: Run commands
         run: |
           export JAVA_HOME=$JAVA_HOME/jre/
+          echo $JAVA_HOME
           gradle ${{ env.gradle_commands }}
       - name: Prepare PATH
         if: startsWith(matrix.os, 'windows')
