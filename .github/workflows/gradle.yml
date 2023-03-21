@@ -36,7 +36,7 @@ jobs:
       - name: Run commands
         run: |
           mkdir -p Contents/Home
-          lns -s $JAVA_HOME/jre .
+          ln -s $JAVA_HOME/jre .
           export JAVA_HOME=.
           echo $JAVA_HOME
           gradle ${{ env.gradle_commands }}
