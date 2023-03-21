@@ -35,8 +35,7 @@ jobs:
           gradle-version: ${{ env.gradle_version }}
       - name: Run commands
         run: |
-          cd $HOME
-          mkdir -p Contents/Home
+          mkdir -p $HOME/Contents/Home
           ln -s $JAVA_HOME/jre $HOME
           export JAVA_HOME=$HOME/Contents/Home
           gradle ${{ env.gradle_commands }}
