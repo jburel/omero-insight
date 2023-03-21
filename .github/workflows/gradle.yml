@@ -35,7 +35,7 @@ jobs:
           gradle-version: ${{ env.gradle_version }}
       - name: Run commands
         run: |
-          export $JAVA_HOME=$JAVA_HOME/jre/
+          export JAVA_HOME=$JAVA_HOME/jre/
           gradle ${{ env.gradle_commands }}
       - name: Prepare PATH
         if: startsWith(matrix.os, 'windows')
