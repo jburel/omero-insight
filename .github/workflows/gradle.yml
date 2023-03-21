@@ -12,12 +12,12 @@ jobs:
   build:
     strategy:
       matrix:
-        java: [8, 11]
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        java: [8]
+        os: [macos-latest]
     runs-on: ${{ matrix.os }}
     env:
       gradle_version: 6.8.3 # use ``current`` to install the current stable release
-      gradle_commands: build # default is build
+      gradle_commands: packageApplicationDmg # default is build
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK ${{ matrix.java }}
