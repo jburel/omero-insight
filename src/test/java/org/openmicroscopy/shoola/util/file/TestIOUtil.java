@@ -137,11 +137,11 @@ public class TestIOUtil
     {
         try {
             String prefix = "test_ome";
-            File dir = Files.createTempDirectory(prefix);
+            File dir = Files.createTempDirectory(prefix).toFile();
             File f = File.createTempFile("testZipDirectory", ".tmp", dir);
             File zip = IOUtil.zipDirectory(dir);
             assertEquals(FilenameUtils.getExtension(zip.getName()), "zip");
-            File destDir = Files.createTempDir(prefix);
+            File destDir = Files.createTempDir(prefix).toFile();
             boolean b = unzip(zip, destDir);
             assertEquals(true, b);
             File[] files = destDir.listFiles();
@@ -162,15 +162,15 @@ public class TestIOUtil
     {
         try {
             String prefix = "test_ome";
-            File dir = Files.createTempDirectory(prefix);
+            File dir = Files.createTempDirectory(prefix).toFile();
             File f = File.createTempFile("testZipDirectoryWithSubfolder", ".tmp", dir);
-            File subfolder = Files.createTempDirectory(prefix);
+            File subfolder = Files.createTempDirectory(prefix).toFile();
             File f1 = File.createTempFile("sub_testZipDirectoryWithSubfolder", ".tmp", subfolder);
 
             FileUtils.moveDirectoryToDirectory(subfolder, dir, false);
 
             File zip = IOUtil.zipDirectory(dir);
-            File destDir = Files.createTempDirectory(prefix);
+            File destDir = Files.createTempDirectory(prefix).toFile();
             boolean b = unzip(zip, destDir);
             assertEquals(true, b);
             File[] files = destDir.listFiles();
