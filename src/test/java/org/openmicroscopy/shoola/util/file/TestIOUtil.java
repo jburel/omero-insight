@@ -141,7 +141,7 @@ public class TestIOUtil
             File f = File.createTempFile("testZipDirectory", ".tmp", dir);
             File zip = IOUtil.zipDirectory(dir);
             assertEquals(FilenameUtils.getExtension(zip.getName()), "zip");
-            File destDir = Files.createTempDir(prefix).toFile();
+            File destDir = Files.createTempDirectory(prefix).toFile();
             boolean b = unzip(zip, destDir);
             assertEquals(true, b);
             File[] files = destDir.listFiles();
