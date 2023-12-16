@@ -34,7 +34,7 @@ import java.util.zip.ZipInputStream;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
-import com.google.common.io.Files;
+import java.nio.file.Files;
 
 import junit.framework.TestCase;
 
