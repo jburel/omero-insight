@@ -136,7 +136,7 @@ public class TestIOUtil
     public void testZipDirectory()
     {
         try {
-            File dir = Files.createTempDir();
+            File dir = Files.createTempDir("test_ome");
             File f = File.createTempFile("testZipDirectory", ".tmp", dir);
             File zip = IOUtil.zipDirectory(dir);
             assertEquals(FilenameUtils.getExtension(zip.getName()), "zip");
@@ -160,7 +160,7 @@ public class TestIOUtil
     public void testZipDirectoryWithSubfolder()
     {
         try {
-            File dir = Files.createTempDir();
+            File dir = Files.createTempDir("test_ome");
             File f = File.createTempFile("testZipDirectoryWithSubfolder", ".tmp", dir);
             File subfolder = Files.createTempDir();
             File f1 = File.createTempFile("sub_testZipDirectoryWithSubfolder", ".tmp", subfolder);
