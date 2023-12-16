@@ -136,11 +136,12 @@ public class TestIOUtil
     public void testZipDirectory()
     {
         try {
-            File dir = Files.createTempDir("test_ome");
+            String prefix = "test_ome";
+            File dir = Files.createTempDir(prefix);
             File f = File.createTempFile("testZipDirectory", ".tmp", dir);
             File zip = IOUtil.zipDirectory(dir);
             assertEquals(FilenameUtils.getExtension(zip.getName()), "zip");
-            File destDir = Files.createTempDir();
+            File destDir = Files.createTempDir(prefix);
             boolean b = unzip(zip, destDir);
             assertEquals(true, b);
             File[] files = destDir.listFiles();
@@ -160,15 +161,16 @@ public class TestIOUtil
     public void testZipDirectoryWithSubfolder()
     {
         try {
-            File dir = Files.createTempDir("test_ome");
+            String prefix = "test_ome";
+            File dir = Files.createTempDir(prefix);
             File f = File.createTempFile("testZipDirectoryWithSubfolder", ".tmp", dir);
-            File subfolder = Files.createTempDir();
+            File subfolder = Files.createTempDir(prefix);
             File f1 = File.createTempFile("sub_testZipDirectoryWithSubfolder", ".tmp", subfolder);
 
             FileUtils.moveDirectoryToDirectory(subfolder, dir, false);
 
             File zip = IOUtil.zipDirectory(dir);
-            File destDir = Files.createTempDir();
+            File destDir = Files.createTempDir(prefix);
             boolean b = unzip(zip, destDir);
             assertEquals(true, b);
             File[] files = destDir.listFiles();
@@ -190,7 +192,6 @@ public class TestIOUtil
             clean(destDir);
         } catch (Exception e) {
             e.printStackTrace();
-            
             fail(e.getMessage());
         }
     }
