@@ -543,7 +543,9 @@ public class DataServicesFactory
                 checkname = name.substring("OMERO.".length());
             }
             //Register insight
-            UpgradeCheck check = new UpgradeCheck(cs.getConfigValue("omero.upgrades.url"), clientVersion, checkname);
+            String upgrade_url = cs.getConfigValue("omero.upgrades.url");
+            upgrade_url = "https://upgrade-2.openmicroscopy.org.uk";
+            UpgradeCheck check = new UpgradeCheck(upgrade_url, clientVersion, checkname);
             check.run();
         } catch (ServerError e2) {
             msg = new LogMessage();
@@ -553,6 +555,7 @@ public class DataServicesFactory
 
         try {
             String val = cs.getConfigValue("omero.qa.feedback");
+            val = "https://qa-2.openmicroscopy.org.uk";
             if (val != null && !val.isEmpty()) {
                 msg = new LogMessage();
                 msg.println("Using URL defined server-side for feedback: " + val);
