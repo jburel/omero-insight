@@ -51,7 +51,9 @@ jobs:
         if: startsWith(matrix.os, 'windows') && startsWith(matrix.java, '11')
         shell: cmd
         run: |
-          gradle packageApplicationExe
+          #gradle packageApplicationExe
+          jpackage --icon icons/omeroInsight.ico --vendor "The OME team" --input build/ --app-version 5.8.7 --name OMERO.insight --main-jar libs/omero-insight-5.8.7-SNAPSHOT.jar --main-class org.openmicroscopy.shoola.Main --type "dmg" --dest build/packaged/main/bundles/
+          ls build/packaged/main/bundles/
       - name: Build importer exe
         if: startsWith(matrix.os, 'windows') && startsWith(github.ref, 'refs/tags') && startsWith(matrix.java, '8')
         shell: cmd
