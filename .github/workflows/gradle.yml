@@ -12,7 +12,7 @@ jobs:
   build:
     strategy:
       matrix:
-        java: [11]
+        java: [14]
         os: [macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     env:
@@ -24,10 +24,9 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: ${{ matrix.java }}
-          #distribution: 'zulu'
-          distribution: 'temurin'
+          distribution: 'zulu'
           cache: 'gradle'
-          #java-package: 'jdk+fx'
+          java-package: 'jdk+fx'
       - uses: gradle/gradle-build-action@v2
         with:
           gradle-version: ${{ env.gradle_version }}
