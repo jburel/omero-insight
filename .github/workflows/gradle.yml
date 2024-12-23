@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         java: [15]
-        os: [macos-latest, windows-latest]
+        os: [windows-latest]
     runs-on: ${{ matrix.os }}
     env:
       gradle_version: 6.8.3 # use ``current`` to install the current stable release
@@ -30,8 +30,8 @@ jobs:
       - uses: gradle/gradle-build-action@v2
         with:
           gradle-version: ${{ env.gradle_version }}
-      - name: Run commands
-        run: gradle ${{ env.gradle_commands }}
+      #- name: Run commands
+      #  run: gradle ${{ env.gradle_commands }}
       - name: Build insight dmg
         if: startsWith(matrix.os, 'macos') && startsWith(matrix.java, '11')
         run: |
