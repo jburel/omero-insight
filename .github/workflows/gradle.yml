@@ -49,7 +49,7 @@ jobs:
       #    choco install innosetup --version=5.6.1
       - name: Build insight exe
         if: startsWith(matrix.os, 'windows') && startsWith(matrix.java, '11')
-        shell: shell
+        shell: bash
         run: |
           ls $JAVA_HOME\bin
           jpackage --icon icons/omeroInsight.ico --vendor "The OME team" --input build/ --app-version 5.8.7 --name OMERO.insight --main-jar libs/omero-insight-5.8.7-SNAPSHOT.jar --main-class org.openmicroscopy.shoola.Main --type "msi"
